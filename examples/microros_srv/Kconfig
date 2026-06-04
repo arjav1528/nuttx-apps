@@ -1,0 +1,31 @@
+#
+# For a description of the syntax of this configuration file,
+# see the file kconfig-language.txt in the NuttX tools repository.
+#
+
+config EXAMPLES_MICROROS_SRV
+	tristate "micro-ROS GetState service server example"
+	default n
+	depends on SYSTEM_MICROROS
+	---help---
+		Minimal micro-ROS service server that creates a node, registers a
+		lifecycle_msgs/srv/GetState service at /nuttx_get_state, and
+		returns a hardcoded State{id=3, label="active"} on every request.
+		Drives an rclc_executor spin loop and exercises the rcl service
+		path on top of the NuttX-native micro-ROS transport.
+
+if EXAMPLES_MICROROS_SRV
+
+config EXAMPLES_MICROROS_SRV_PROGNAME
+	string "Program name"
+	default "microros_srv"
+
+config EXAMPLES_MICROROS_SRV_PRIORITY
+	int "micro-ROS srv task priority"
+	default 100
+
+config EXAMPLES_MICROROS_SRV_STACKSIZE
+	int "micro-ROS srv stack size"
+	default 8192
+
+endif

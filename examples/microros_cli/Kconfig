@@ -1,0 +1,31 @@
+#
+# For a description of the syntax of this configuration file,
+# see the file kconfig-language.txt in the NuttX tools repository.
+#
+
+config EXAMPLES_MICROROS_CLI
+	tristate "micro-ROS GetState service client example"
+	default n
+	depends on SYSTEM_MICROROS
+	---help---
+		Minimal micro-ROS service client that creates a node, sends a
+		lifecycle_msgs/srv/GetState request to /nuttx_get_state, and
+		prints the State{id,label} returned in the response.  Drives an
+		rclc_executor spin loop and exercises the rcl client path on top
+		of the NuttX-native micro-ROS transport.
+
+if EXAMPLES_MICROROS_CLI
+
+config EXAMPLES_MICROROS_CLI_PROGNAME
+	string "Program name"
+	default "microros_cli"
+
+config EXAMPLES_MICROROS_CLI_PRIORITY
+	int "micro-ROS cli task priority"
+	default 100
+
+config EXAMPLES_MICROROS_CLI_STACKSIZE
+	int "micro-ROS cli stack size"
+	default 8192
+
+endif
